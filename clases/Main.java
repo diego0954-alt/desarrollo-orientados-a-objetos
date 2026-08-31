@@ -1,65 +1,77 @@
 import java.util.Scanner;
 
 public class Main {
-    
+
     public static void main(String[] args) {
         mostrarMenu();
     }
 
+    static void mostrarMenu() {
+        String opcion_menu;
+        boolean mantener_menu = true;
 
+        Personaje personaje_jugador = new Personaje();
 
-    static void mostrarMenu(){
-        String opcion_elegida;
         Scanner scanner = new Scanner(System.in);
-        boolean iniciar_menu = true;
-        System.out.print("bienvenido al mundo de westeros");
 
-       while (iniciar_menu) {
+        while (mantener_menu) {
+            System.out.println("Elija su opción");
+            System.out.println("1.- Crear personaje");
+            System.out.println("2.- Ver personaje");
+            System.out.println("3.- Cerrar");
+            System.out.println("4.- testeando cosas");
+            opcion_menu = scanner.nextLine();
 
-         System.out.println("1.- crear personaje");
-        System.out.println("2.- ver personaje");
-        System.out.println("3.- salir");
+            switch (opcion_menu) {
+                case "1":
+                    System.out.println("Creación del Personaje");
+                    System.out.println("¿Cómo llamaras al personaje?");
+                    personaje_jugador.nombre = scanner.nextLine();
 
-        System.out.print("porfavor ingrese una opcion: ");
+                    System.out.println("¿Cómo llamaras al apellido del personaje?");
+                    personaje_jugador.apellido = scanner.nextLine();
 
-        opcion_elegida = scanner.nextLine();
+                    System.out.println("Asigna la vida del personaje");
+                    personaje_jugador.setVida(Integer.parseInt(scanner.nextLine()));
 
-        System.out.print("la opcion elegida por usuario es: " + opcion_elegida);
+                    System.out.println("Asignarle la edad al personaje");
+                    personaje_jugador.ingresarEdad(Integer.parseInt(scanner.nextLine()));
 
-        switch (opcion_elegida) {
-            case "1":
-                System.out.println(" creacion personaje");
-                Personaje personaje_jugador = new Personaje();
+                    break;
+                case "2":
+                    System.out.println("Datos del personaje creado");
+                    System.out.println("Nombre personaje: " + personaje_jugador.nombre);
+                    System.out.println("Apellido personaje: " + personaje_jugador.apellido);
 
-                System.out.println("como se llamaras a tu héroe?");
-                personaje_jugador.nombre = scanner.nextLine();
-                System.out.println("el nombre del jugador es: " + personaje_jugador.nombre);
+                    // OJITO CON ESTO, ESTO ES LA LUZ!
+                    // REFLEXIONA, POR QUÉ ES MEJOR ESTO?
+                    // ENCAPSULANDO
+                    System.out.println("Vida personaje: " + personaje_jugador.getVida());
+                    System.out.println("¿Se encuentra vivo?: " + personaje_jugador.esta_vivo);
+                    System.out.println("La edad del personaje es: " + personaje_jugador.obtenerEdad());
+                    break;
+                case "3":
+                    System.out.println("Cosas de opcion 3");
+                    mantener_menu = false;
+                    break;
 
-                System.out.println("cual es el apellido de tu héroe?");
-                personaje_jugador.apellido = scanner.nextLine();
-                System.out.println("el nombre del jugador es: " + personaje_jugador.apellido);
+                case "4":
+                    testeando_cosas();
 
-                System.out.println("indique la vida del héroe?");
-                personaje_jugador.vida = Integer.parseInt(scanner.nextLine());
-                System.out.println("el nombre del jugador es: " + personaje_jugador.vida);
-
-                break;
-            
-            case "2":
-                System.out.println(" ver personaje");
-                System.out.println("");
-                break;
-
-            case "3":
-                System.out.println(" gracias por jugar");
-                iniciar_menu = false;
-                break;
-        
-            default:
-                System.out.println("porfavor ingrese una de las opciones permitidas");
-                break;
-        
-       }
+                default:
+                    System.out.println("Por favor ingrese una opción valida");
+                    break;
+            }
         }
+    }
+
+    public void trabajar(){
+        System.out.println("escribiendo codigo");
+        GameDave GameDave = new GameDave();
+        GameDave.experiencia();
+        System.out.println("Experiencia de GameDave: ");
+        
+       
+        
     }
 }
