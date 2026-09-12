@@ -28,13 +28,11 @@ public class Mago  extends Personaje{
 
     @Override
     public String atacar() {
-        // TODO Auto-generated method stub
-        return null;
+        return "su mana es " + this.mana + " su hechizo favorito es " +  this.echizoFavorito;
     }
     @Override
     public String mostraInfo() {
-        // TODO Auto-generated method stub
-        return super.mostraInfo();
+        return super.mostraInfo() + atacar();
     }
 
     

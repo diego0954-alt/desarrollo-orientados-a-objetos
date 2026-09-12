@@ -33,6 +33,6 @@ public class Gerrero extends Personaje{
     
     @Override
     public String mostraInfo() {
-        return super.mostraInfo();
+        return super.mostraInfo() + atacar();
     }
 }
