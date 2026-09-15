@@ -12,7 +12,13 @@ public class Tienda {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        mostrarMenu();
+        try {
+            mostrarMenu();
+        } catch (Exception e) {
+            System.out.println("Error inesperado en el programa: " + e.getMessage());
+        } finally {
+            sc.close();
+        }
     }
 
     public static void mostrarMenu() {
@@ -30,30 +36,34 @@ public class Tienda {
 
             String opcion_menu = sc.nextLine();
 
-            switch (opcion_menu) {
-                case "1":
-                    registrarProducto();
-                    break;
-                case "2":
-                    listarInventario();
-                    break;
-                case "3":
-
-                    break;
-                case "4":
-
-                    break;
-                case "5":
-
-                    break;
-                case "6":
-
-                    break;
-
-                default:
-                    break;
+            try {
+                switch (opcion_menu) {
+                    case "1":
+                        registrarProducto();
+                        break;
+                    case "2":
+                        listarInventario();
+                        break;
+                    case "3":
+                        System.out.println("Opción aún no implementada.");
+                        break;
+                    case "4":
+                        System.out.println("Opción aún no implementada.");
+                        break;
+                    case "5":
+                        System.out.println("Opción aún no implementada.");
+                        break;
+                    case "6":
+                        mostrar_menu = false;
+                        System.out.println("Saliendo de la tienda...");
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Elija un número del 1 al 6.");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("No se pudo completar la opción: " + e.getMessage());
             }
-
         }
     }
 
@@ -87,52 +97,91 @@ public class Tienda {
         }
     }
 
-    static public void registrarProductoFisico(){
+    static public void registrarProductoFisico() {
+        try {
+            System.out.println("Ingrese nombre del juego");
+            String nombre = sc.nextLine();
 
-        System.out.println("Ingrese nombre del juego");
-        String nombre = sc.nextLine();
+            int precioBase = leerEntero("Ingrese precio base del juego");
+            int stock = leerEntero("Ingrese stock del juego");
+            int costo_envio = leerEntero("Ingrese costo de envio del juego");
 
-        System.out.println("Ingrese precio base del juego");
-        int precioBase = Integer.parseInt(sc.nextLine());
+            validarDatosProducto(nombre, precioBase, stock);
 
-        System.out.println("Ingrese stock del juego");
-        int stock = Integer.parseInt(sc.nextLine());
-
-        System.out.println("Ingrese costo de envio del juego");
-        int costo_envio = Integer.parseInt(sc.nextLine());
-
-        ProductoFisico juego = new ProductoFisico(nombre, precioBase, stock, costo_envio);
-
-        coleccion_juegos_fisicos.add(juego);
+            ProductoFisico juego = new ProductoFisico(nombre, precioBase, stock, costo_envio);
+            coleccion_juegos_fisicos.add(juego);
+            System.out.println("Producto físico registrado.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("No se registró el producto: " + e.getMessage());
+        }
     }
 
-    static public void registrarProductoDigital(){
+    static public void registrarProductoDigital() {
+        try {
+            System.out.println("Ingrese nombre del juego");
+            String nombre = sc.nextLine();
 
-        System.out.println("Ingrese nombre del juego");
-        String nombre = sc.nextLine();
+            int precioBase = leerEntero("Ingrese precio base del juego");
+            int stock = leerEntero("Ingrese stock del juego");
+            int descuento = leerEntero("Ingrese el descuento del juego");
 
-        System.out.println("Ingrese precio base del juego");
-        int precioBase = Integer.parseInt(sc.nextLine());
+            System.out.println("Ingrese la plataforma del juego");
+            String plataforma = sc.nextLine();
 
-        System.out.println("Ingrese stock del juego");
-        int stock = Integer.parseInt(sc.nextLine());
+            validarDatosProducto(nombre, precioBase, stock);
 
-        System.out.println("Ingrese costo de envio del juego");
-        int descuento = Integer.parseInt(sc.nextLine());
+            if (descuento < 0 || descuento > 100) {
+                throw new IllegalArgumentException("El descuento debe estar entre 0 y 100.");
+            }
 
-        System.out.println("Ingrese la plataforma del juego");
-        String plataforma = sc.nextLine();
-
-        ProductoDigital juego = new ProductoDigital(nombre, precioBase, stock, descuento, plataforma);
-
-        coleccion_juegos_digitales.add(juego);
+            ProductoDigital juego = new ProductoDigital(nombre, precioBase, stock, descuento, plataforma);
+            coleccion_juegos_digitales.add(juego);
+            System.out.println("Producto digital registrado.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("No se registró el producto: " + e.getMessage());
+        }
     }
 
-
-    static public void listarInventario(){
+    static public void listarInventario() {
         System.out.println("****Listado de juegos Físicos****");
-        for (ProductoFisico productoFisico : coleccion_juegos_fisicos) {
-            System.out.println(productoFisico.mostrarInfo());
+        if (coleccion_juegos_fisicos.isEmpty()) {
+            System.out.println("No hay juegos físicos registrados.");
+        } else {
+            for (ProductoFisico productoFisico : coleccion_juegos_fisicos) {
+                System.out.println(productoFisico.mostrarInfo());
+            }
+        }
+
+        System.out.println("****Listado de juegos Digitales****");
+        if (coleccion_juegos_digitales.isEmpty()) {
+            System.out.println("No hay juegos digitales registrados.");
+        } else {
+            for (ProductoDigital productoDigital : coleccion_juegos_digitales) {
+                System.out.println(productoDigital.mostrarInfo());
+            }
+        }
+    }
+
+    static int leerEntero(String mensaje) {
+        while (true) {
+            System.out.println(mensaje);
+            try {
+                return Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Debe ingresar un número entero. Intente de nuevo.");
+            }
+        }
+    }
+
+    static void validarDatosProducto(String nombre, int precioBase, int stock) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío.");
+        }
+        if (precioBase < 0) {
+            throw new IllegalArgumentException("El precio no puede ser negativo.");
+        }
+        if (stock < 0) {
+            throw new IllegalArgumentException("El stock no puede ser negativo.");
         }
     }
 
