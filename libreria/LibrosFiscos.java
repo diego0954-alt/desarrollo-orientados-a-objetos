@@ -19,7 +19,7 @@ public class LibrosFiscos extends Libros {
 
     @Override
     public int calcularPrecioFinal() {
-        return PrecioBase + CostoEnvio;
+        return getPrecioBase() + CostoEnvio;
     }
 
    @Override
