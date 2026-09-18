@@ -46,6 +46,7 @@ public class Main {
                     break;
 
                 case "5":
+                    ResumenInventario();
                     break;
 
                 case "6":
@@ -242,5 +243,34 @@ public class Main {
             System.out.println("debe ingresar un numero valido");
         }
     }
-}
 
+    static void ResumenInventario() {
+        System.out.println("***** Resumen del Inventario *****");
+
+        if (Inventario.isEmpty()) {
+            System.out.println("el inventario esta vacio");
+            return;
+        }
+
+        int totalFisicos = 0;
+        int totalDigitales = 0;
+        int valorTotal = 0;
+
+        for (int i = 0; i < Inventario.size(); i++) {
+            Libros L = Inventario.get(i);
+
+            if (L instanceof LibrosFiscos) {
+                totalFisicos++;
+            } else if (L instanceof LibrosDigitales) {
+                totalDigitales++;
+            }
+
+            valorTotal += L.calcularPrecioFinal() * L.getStock();
+        }
+
+        System.out.println("total de libros distintos: " + Inventario.size());
+        System.out.println("libros fisicos: " + totalFisicos);
+        System.out.println("libros digitales: " + totalDigitales);
+        System.out.println("valor total del inventario: $" + valorTotal);
+    }
+}
