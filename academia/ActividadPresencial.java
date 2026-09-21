@@ -19,7 +19,7 @@ public class ActividadPresencial extends Actividad {
 
     @Override
     public int CalcularCupos() {
-        return 0;
+        return this.getPrecioBase() + this.getCostoSala();
     }
 
     @Override

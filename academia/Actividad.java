@@ -35,7 +35,7 @@ public abstract class Actividad {
         Cupos = cupos;
     }
 
-    public  abstract int CalcularCupos();
+    public abstract int CalcularCupos();
 
     public String MostrarInfo(){
         return "el nombre es: " + Nombre + " el precio base es: $" + PrecioBase + " los cupos son: " + Cupos;

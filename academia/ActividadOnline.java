@@ -28,7 +28,7 @@ public class ActividadOnline extends Actividad{
     
     @Override
     public int CalcularCupos() {
-        return 0;
+        return this.getPrecioBase() - ((this.getPrecioBase() * this.getDescuento()) / 100);
     }
 
     @Override

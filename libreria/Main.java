@@ -162,6 +162,8 @@ public class Main {
         for (int i = 0; i < Inventario.size(); i++) {
             Libros I = Inventario.get(i);
             System.out.println("[" + (i + 1) + "] " + I.mostrarInfo());
+
+        
         }
         System.out.println("los productos que se encuamtran en el catalogo son" + Inventario.size());
     }
@@ -273,4 +275,5 @@ public class Main {
         System.out.println("libros digitales: " + totalDigitales);
         System.out.println("valor total del inventario: $" + valorTotal);
     }
+
 }
