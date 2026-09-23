@@ -1,255 +1,187 @@
 package academia;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
-    static ArrayList<Actividad> Inventario = new ArrayList<>();
-    static Scanner Pedir = new Scanner(System.in);
+    static ArrayList<Material> Inventario = new ArrayList<>();
+    static Scanner consola = new Scanner(System.in);
 
     public static void main(String[] args) {
-        MostraMenu();
+        MostrarMenu();
     }
 
-    public static void MostraMenu() {
-        boolean MostraMenu = true;
+    static public void MostrarMenu() {
+        boolean Funciona = true;
 
-        while (MostraMenu) {
-            System.out.println("1. registrar");
-            System.out.println("2. listar");
-            System.out.println("3. buscar por Nombre");
-            System.out.println("4. vender");
-            System.out.println("5. resumen");
+        while (Funciona) {
+
+            System.out.println("==== BIBLIOTECA MUNICIPAL ====");
+            System.out.println("1. Registrar material");
+            System.out.println("2. listar catalogo");
+            System.out.println("3. buscar material por revista");
+            System.out.println("4. prestar material");
+            System.out.println("5. resumen del catalogo");
             System.out.println("6. salir");
             System.out.println("7. insertar datos");
+            System.out.println("seleccione una opcio:");
 
-            System.out.println("selecione su opcion: ");
+            String OpcionMemu = consola.nextLine();
 
-            String OpcionMenu = Pedir.nextLine();
-
-            switch (OpcionMenu) {
+            switch (OpcionMemu) {
                 case "1":
-                    MostraSubMenu();
+                    MostrarSubMenu();
                     break;
 
                 case "2":
-                    ListarInventario();
+                    ListarCatalogo();
                     break;
 
                 case "3":
-                    BuscarPorNombre();
+                    BuscarPorTitulo();
                     break;
 
                 case "4":
-                    VenderActividad();
                     break;
 
                 case "5":
-                    ResumenInventario();
                     break;
 
                 case "6":
-                    MostraMenu = false;
-                    System.out.println("chao");
+                    Funciona = false;
+                    System.out.println("gracias por usar la biblioteca nacional, que tenga buen dia :)");
                     break;
 
                 case "7":
-                    DatosInsertados();
+                    InsertarDatos();
                     break;
-
                 default:
                     break;
             }
-
         }
-
     }
 
-    public static void MostraSubMenu() {
-        boolean MostraSubMenu = true;
+    static public void MostrarSubMenu() {
+        boolean FuncionaSubMenu = true;
 
-        while (MostraSubMenu) {
-            System.out.println("1.- registrar actividad Online");
-            System.out.println("2.- registrar actividad Precensial");
-            System.out.println("3.- salir");
+        while (FuncionaSubMenu) {
 
-            String OpcionSubMenu = Pedir.nextLine();
+            System.out.println("1. registra libro");
+            System.out.println("2. registrar revista");
+            System.out.println("3. salir");
+
+            System.out.println("seleccione una opcio:");
+
+            String OpcionSubMenu = consola.nextLine();
 
             switch (OpcionSubMenu) {
                 case "1":
-                    ActividadOnline();
+                    registraLibro();
                     break;
 
                 case "2":
-                    ActividadPresencial();
+                    registraRevista();
                     break;
 
                 case "3":
-                    MostraSubMenu = false;
-                    System.out.println("chao submenu");
+                    FuncionaSubMenu = false;
+                    System.out.println("gracias por usar el sistema de registro");
                     break;
 
                 default:
                     break;
-            }
 
+            }
         }
     }
 
-    static void ActividadOnline() {
-        System.out.println("Ingrese el nombre de la persona: ");
-        String Nombre = Pedir.nextLine();
+    static void registraLibro() {
+        System.out.println("ingrese el nombre del titulo: ");
+        String Titulo = consola.nextLine();
 
-        System.out.println("Ingrese el precio base de la actividad: ");
-        int PrecioBase = Integer.parseInt(Pedir.nextLine());
+        System.out.println("ingrese el nombre del autor: ");
+        String Autor = consola.nextLine();
 
-        System.out.println("Ingrese los cupos de la actividad: ");
-        int Cupos = Integer.parseInt(Pedir.nextLine());
+        System.out.println("ingrese la cantidad disponible: ");
+        int CantidadDisponible = Integer.parseInt(consola.nextLine());
 
-        System.out.println("Ingrese el descuento de la actividad: ");
-        int Descuento = Integer.parseInt(Pedir.nextLine());
+        System.out.println("ingrese el numero de paguinas: ");
+        int NumPaginas = Integer.parseInt(consola.nextLine());
+        Material likos = new Libros(NumPaginas, Titulo, Autor, CantidadDisponible);
+        Inventario.add(likos);
+        System.out.println("hola");
 
-        System.out.println("Ingrese la plataforma de la actividad: ");
-        String Plataforma = Pedir.nextLine();
-
-        ActividadOnline Actividad = new ActividadOnline(Descuento, Plataforma, Nombre, PrecioBase, Cupos);
-        Inventario.add(Actividad);
-        System.out.println("la actividad online se registro con exito, todo un pro");
     }
 
-    static void ActividadPresencial() {
-        System.out.println("Ingrese el nombre de la persona: ");
-        String Nombre = Pedir.nextLine();
+    static void registraRevista() {
+        System.out.println("ingrese el nombre del titulo: ");
+        String Titulo = consola.nextLine();
 
-        System.out.println("Ingrese el precio base de la actividad: ");
-        int PrecioBase = Integer.parseInt(Pedir.nextLine());
+        System.out.println("ingrese el nombre del autor: ");
+        String Autor = consola.nextLine();
 
-        System.out.println("Ingrese los cupos de la actividad: ");
-        int Cupos = Integer.parseInt(Pedir.nextLine());
+        System.out.println("ingrese la cantidad disponible: ");
+        int CantidadDisponible = Integer.parseInt(consola.nextLine());
 
-        System.out.println("Ingrese el costo de la sala presencial: ");
-        int CostoSala = Integer.parseInt(Pedir.nextLine());
+        System.out.println("ingrese el mes de la publicacion: ");
+        String MesPublicacion = consola.nextLine();
 
-        ActividadPresencial Actividad = new ActividadPresencial(CostoSala, Nombre, PrecioBase, Cupos);
-        Inventario.add(Actividad);
-        System.out.println("se registro con exito la sala Presencial, eres el mejorrr");
+        Material revitas = new Revistas(MesPublicacion, Titulo, Autor, CantidadDisponible);
+        Inventario.add(revitas);
+        System.err.println("hola");
+
     }
 
-    static void ListarInventario() {
-        System.out.println("***** Lista Del Inventario *****");
+    static void ListarCatalogo() {
+        System.out.println("****** Lista De Catalogo *******");
 
         if (Inventario.isEmpty()) {
-            System.out.println("el Inventario esta vacio");
+            System.out.println("no se encuentra nada dentro del inventario");
             return;
         }
-
         for (int i = 0; i < Inventario.size(); i++) {
-            Actividad A = Inventario.get(i);
-            System.out.println("[" + (i + 1) + "]" + A.MostrarInfo());
+            Material L = Inventario.get(i);
+            System.out.println("[" + (i + 1) + "]" + L.mostrarInfo());
 
         }
-        System.out.println("las actividad se encuntran en el inventario son: " + Inventario.size());
     }
 
-    static void BuscarPorNombre() {
-        System.out.println("***** Busqueda Por Nombre *****");
-        String Busqueda = Pedir.nextLine();
+    static void BuscarPorTitulo() {
+        System.out.println("===== BUSCAR POR TITULO =====");
+        String Buscar = consola.nextLine();
 
         if (Inventario.isEmpty()) {
-            System.out.println("el Inventario esta vacio");
+            System.out.println("no hay nada en el inventario");
             return;
         }
-        boolean encontrado = false;
+        boolean Encontrado = false;
 
         for (int i = 0; i < Inventario.size(); i++) {
-            Actividad B = Inventario.get(i);
+            Material B = Inventario.get(i);
 
-            if (B.getNombre().toLowerCase().contains(Busqueda.toLowerCase())){
-            encontrado = true;
-            System.out.println("el nombre fue encontado con exito: " + B.MostrarInfo());
+            if (B.getAutor().toLowerCase().contains(Buscar.toLowerCase())) {
+                Encontrado = true;
+                System.out.println("se encontro el autor" + B.mostrarInfo());
+
             }
-        }
-        if (encontrado == false) {
-            System.out.println("el nombre no existe, porfavor intente denuevo");
+            if(Encontrado == false){
+                System.out.println("no se encontro nada relacionado con el autor");
+            }
+
         }
 
     }
 
-    static void VenderActividad() {
-        System.out.println("***** Vender Actividad *****");
-        if(Inventario.isEmpty()){
-            System.out.println("no se encuentra ndaa");
-            return;
-        }
-        for (int i = 0; i  < Inventario.size(); i++) {
-            Actividad V = Inventario.get(i);
-            System.out.println("[" + (i + 1) + "]" + V.getNombre() + " | cupos" + V.getCupos() + "total: " + V.CalcularCupos());
+    static void InsertarDatos() {
+        System.out.println("====== DATOS INSERTADOS =======");
+        Inventario.add(new Revistas("febrero", "programacion1 ", "carlos", 4));
+        Inventario.add(new Revistas("febrero", "programacion2 ", "carlos", 9));
+        Inventario.add(new Revistas("febrero", "programacion3 ", "carlos", 90));
 
-        try {
-            System.out.println("ingrese el numero del dato");
-            int numero = Integer.parseInt(Pedir.next());
-
-            if(numero < 1 || numero > Inventario.size()){
-                System.out.println("el numero no es posible");
-                return;
-            }
-            Actividad selecione = Inventario.get(numero - 1);
-
-            System.out.println("selecione la cantidad a vender");
-            int cantidad = Integer.parseInt(Pedir.nextLine());
-
-            if(cantidad <= 0){
-            System.out.println("el numero deve ser mayor a 0");
-            return;
-            }
-
-            if(cantidad > selecione.getCupos()){
-                System.out.println("la cantidad debe ser mayor a la cantidad disponible" + selecione.getCupos());
-                return;
-            }
-            selecione.setCupos(selecione.getCupos() - cantidad);
-            int totalVenta = selecione.CalcularCupos() * cantidad;
-
-            System.out.println("se vendio con exito");
-            System.out.println("cantidad");
-            System.out.println("se vendio con exito");
-            System.out.println("se vendio con exito");
-            System.out.println("se vendio con exito");
-
-
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-        }
-    
+        Inventario.add(new Libros(3, "programacion4 ", "carlos", 23));
+        Inventario.add(new Libros(43, "programacion5 ", "carlos", 84));
+        Inventario.add(new Libros(100, "programacion6 ", "carlos", 1));
     }
 
-    static void ResumenInventario() {
-        System.out.println("***** Resumen Del Inventario *****");
-
-        if (Inventario.isEmpty()) {
-            System.out.println("el Inventario esta vacio");
-            return;
-        }
-
-        for (int i = 0; i < Inventario.size(); i++) {
-            Actividad R = Inventario.get(i);
-        }
-
-    }
-
-    static void DatosInsertados(){
-        System.out.println("############# DATOS INSERTADOS #############");
-
-        Inventario.add(new ActividadOnline(10, "netflix", "romina", 15000, 3));
-        Inventario.add(new ActividadOnline(50, "disney", "oliver", 90000, 6));
-        Inventario.add(new ActividadOnline(32, "amazon", "moana", 42000, 4));
-
-        Inventario.add(new ActividadPresencial(75000, "benjamin", 50000, 9));
-        Inventario.add(new ActividadPresencial(50000, "diego", 35000, 11));
-        Inventario.add(new ActividadPresencial(20000, "samanta", 80000, 17));
-
-    }
 }
