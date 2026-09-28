@@ -19,12 +19,12 @@ public class Revistas extends Material{
 
     @Override
     public int calcularDiasPrestamo() {
-        return 7;
-       
+        return 3;
+        
     }
 
     @Override
     public String mostrarInfo() {
-       return super.mostrarInfo() + " mes de publicacion: " + getMesPublicacion();
+        return super.mostrarInfo() + " el mes de publicacion es el: " + getMesPublicacion();
     }
 }

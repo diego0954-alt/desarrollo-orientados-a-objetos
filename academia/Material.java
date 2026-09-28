@@ -38,7 +38,7 @@ public abstract class Material {
     public abstract int calcularDiasPrestamo();
 
     public String mostrarInfo(){
-        return "el titulo es: " + getTitulo() + "el autor es: " + getAutor() + "la cantidad disponible es de: " + getCantidadDisponible();
+        return"el titulo es: " + getTitulo() + "el autor es: " + getAutor() + "la cantidad disponible es de: " + getCantidadDisponible() + calcularDiasPrestamo();
     }
 
 }
