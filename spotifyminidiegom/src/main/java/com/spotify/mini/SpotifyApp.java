@@ -1,43 +1,41 @@
 package com.spotify.mini;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class SpotifyApp extends Application{
-    
+
     @Override
-    public void start(Stage escenario) throws Exception {
+    public void start(Stage mama) throws Exception {
+
+        Label nombre = new Label("wuapo");
+        Label carrera = new Label("samame");
+        TextField caja = new TextField();
+        Button boton = new Button("precionar para confirmra");
         
-        Label lblNombreApp = new Label("♥ SpotifyDuoc ☺");
-        lblNombreApp.setStyle("-fx-text-fill: #fff");
 
-        TextField txtArtista = new TextField();
-        txtArtista.setStyle("-fx-background-radius: 20px;");
+        VBox aplication = new VBox(10, nombre, carrera, caja, boton);
 
-        Button btnAgregarCancion = new Button("Aceptar");
-        btnAgregarCancion.setStyle("-fx-background-color:rgb(20, 163, 77);" + "-fx-background-radius: 20px;" + "-fx-padding: 5 20;" + "-fx-text-fill: #fff;");
 
-        VBox contenedor_vertical = new VBox(15, lblNombreApp, txtArtista, btnAgregarCancion);
+        boton.setOnAction(e -> {
+            Label saludo = new Label(caja.getText());
+            aplication.getChildren().add(saludo);
+        });
 
-        contenedor_vertical.setStyle("-fx-background-color: #222;");
+        Scene scene = new Scene(aplication, 400, 250);
 
-        contenedor_vertical.setPadding(new Insets(20));
-
-        Scene scene = new Scene(contenedor_vertical, 500, 300);
-
-        escenario.setScene(scene);
-        escenario.show();
+        mama.setScene(scene);
+        mama.setTitle("para una persona ");
+        mama.show();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
+    
 }
