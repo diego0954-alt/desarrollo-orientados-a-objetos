@@ -1,0 +1,34 @@
+[
+    {
+    "rut": "11.111.111-1",
+    "nombre": "juanito perez",
+    "email": "juanitoP@gmail.com",
+    "edad": 19,
+    "puede_solicitar_prestamos": true
+    },
+
+    {
+    "rut": "22.222.222-2",
+    "nombre": "maria mar",
+    "email": "mariaM@gmail.com",
+    "edad": 23,
+    "puede_solicitar_prestamos": false
+    },
+
+    {
+    "rut": "33.333.333-3",
+    "nombre": "santa luz",
+    "email": "santaLP@gmail.com",
+    "edad": 43,
+     "puede_solicitar_prestamos": true
+    },
+
+        {
+    "rut": "44.444.444-4",
+    "nombre": "salia mercedez",
+    "email": "saliaM@gmail.com",
+    "edad": 14,
+     "puede_solicitar_prestamos": false
+    }
+
+]
