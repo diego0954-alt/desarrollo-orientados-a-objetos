@@ -1,0 +1,33 @@
+[
+    {
+    "nombre": "emilio sar",
+    "rut": "11.111.111-1",
+    "email": "e.sar@duocuc.cl",
+    "edad": 13,
+    "puede_solicitar_prestamo": true
+    },
+
+    {
+    "nombre": "juan peres",
+    "rut": "22.222.222-2",
+    "email": "J.peres@duocuc.cl",
+    "edad": 22,
+    "puede_solicitar_prestamo": false
+    },
+
+    {
+    "nombre": "trataro santos",
+    "rut": "33.333.333-3",
+    "email": "T.santos@duocuc.cl",
+    "edad": 18,
+    "puede_solicitar_prestamo": false
+    },
+
+    {
+    "nombre": "samuel banos",
+    "rut": "44.444.444-4",
+    "email": "Sa.banos@duocuc.cl",
+    "edad": 30,
+    "puede_solicitar_prestamo": true
+    }
+]
